@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dwitter/static/css/main.42cbacf2.css",
+    "main.js": "/dwitter/static/js/main.96df075d.js",
+    "static/media/logo.jpg": "/dwitter/static/media/logo.9331bb6a3c11a57d25fc.jpg",
+    "static/media/i-user.svg": "/dwitter/static/media/i-user.40bc821d9da521b709c889a810bf5e01.svg",
+    "index.html": "/dwitter/index.html",
+    "main.42cbacf2.css.map": "/dwitter/static/css/main.42cbacf2.css.map",
+    "main.96df075d.js.map": "/dwitter/static/js/main.96df075d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42cbacf2.css",
+    "static/js/main.96df075d.js"
+  ]
+}

@@ -1,15 +1,23 @@
 import { Link } from "react-router-dom";
+import Logo from "../images/logo.jpg";
+import Mypage from "../images/i-user.svg";
 
-const Nav = () => {
+const Nav = ({ userObj }) => {
   return (
     <>
       <nav>
         <ul>
-          <li>
-            <Link to="/">Home</Link>
+          <li className="logo">
+            <Link to="/">
+              <img src={Logo} alt="" />
+            </Link>
           </li>
-          <li>
-            <Link to="/profile">Profile</Link>
+          <li className="user">
+            {userObj && (
+              <Link to="/profile">
+                <img src={Mypage} alt="" />
+              </Link>
+            )}
           </li>
         </ul>
       </nav>

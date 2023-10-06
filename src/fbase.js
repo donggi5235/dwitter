@@ -9,6 +9,9 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  query,
+  orderBy,
+  where,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -18,6 +21,8 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   signOut,
+  updateProfile,
+  deleteUser,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -39,6 +44,9 @@ export {
   auth,
   analytics,
   db,
+  orderBy,
+  query,
+  where,
   collection,
   addDoc,
   getDocs,
@@ -52,4 +60,6 @@ export {
   doc,
   deleteDoc,
   updateDoc,
+  updateProfile,
+  deleteUser,
 };

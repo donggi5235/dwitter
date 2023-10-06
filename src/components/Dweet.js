@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { db, doc, deleteDoc, updateDoc } from "fbase";
+import { getStorage, ref, deleteObject } from "firebase/storage";
+
+const storage = getStorage();
 
 const Dweet = ({ dweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -9,6 +12,10 @@ const Dweet = ({ dweetObj, isOwner }) => {
     if (ok) {
       // true
       await deleteDoc(doc(db, "dweets", dweetObj.id));
+      if (dweetObj.img) {
+        const fileRef = ref(storage, dweetObj.img);
+        await deleteObject(fileRef);
+      }
     }
   };
   const toggleEditing = () => {
@@ -28,8 +35,8 @@ const Dweet = ({ dweetObj, isOwner }) => {
   return (
     <div>
       {editing ? (
-        <>
-          <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
+          <div>
             <input
               type="text"
               name=""
@@ -39,13 +46,25 @@ const Dweet = ({ dweetObj, isOwner }) => {
               required
               onChange={onChange}
             />
-            <input type="submit" value="수정완료" />
-          </form>
-          <button onClick={toggleEditing}>취소</button>
-        </>
+          </div>
+          <div>
+            <input type="file" />
+          </div>
+          <div>
+            <button type="submit">수정완료</button>
+            <button type="button" onClick={toggleEditing}>
+              취소
+            </button>
+          </div>
+        </form>
       ) : (
         <>
           <h4>{dweetObj.text}</h4>
+          {dweetObj.img && (
+            <div>
+              <img src={dweetObj.img} alt="" width="200px" height="200px" />
+            </div>
+          )}
           {isOwner && (
             <>
               <button onClick={toggleEditing}>수정</button>

@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, createUserWithEmailAndPassword } from "fbase";
+import { auth, createUserWithEmailAndPassword, updateProfile } from "fbase";
 
 const Join = () => {
+  const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const onChange = (e) => {
     const {
       target: { name, value },
     } = e;
-    if (name === "email") {
+    if (name === "name") {
+      setName(value);
+    } else if (name === "email") {
       setEmail(value);
     } else if (name === "pw") {
       setPassword(value);
@@ -20,6 +23,7 @@ const Join = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, Email, Password);
+      await updateProfile(auth.currentUser, { displayName: Name });
       alert("회원가입에 성공하였습니다!\n로그인 페이지로 이동합니다");
       window.location.href = "/";
     } catch (err) {
@@ -30,12 +34,20 @@ const Join = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="content join">
+      <h2>회원가입</h2>
       <form onSubmit={onSubmit}>
-        <div>
-          <input type="text" name="name" placeholder="name" required />
+        <div className="inputWrap">
+          <input
+            type="text"
+            name="name"
+            placeholder="name"
+            value={Name}
+            onChange={onChange}
+            required
+          />
         </div>
-        <div>
+        <div className="inputWrap">
           <input
             type="text"
             name="email"
@@ -45,7 +57,7 @@ const Join = () => {
             onChange={onChange}
           />
         </div>
-        <div>
+        <div className="inputWrap">
           <input
             type="password"
             name="pw"
@@ -55,11 +67,11 @@ const Join = () => {
             onChange={onChange}
           />
         </div>
-        <div>
+        <div className="inputWrap">
           <input type="submit" value="Join" />
         </div>
       </form>
-      <div>
+      <div className="btnWrap">
         <button
           onClick={(e) => {
             e.preventDefault();

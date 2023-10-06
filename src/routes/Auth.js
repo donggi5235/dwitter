@@ -39,36 +39,44 @@ const Auth = () => {
     if (socialType === "google") {
       // 구글
       provider = new GoogleAuthProvider();
-    } else if (socialType === "github") {
+    }
+    if (socialType === "github") {
       // 깃헙
       provider = new GithubAuthProvider();
     }
-    const data = await signInWithPopup(auth, provider);
-    console.log(data);
+    await signInWithPopup(auth, provider);
+    // console.log(data);
   };
 
   return (
-    <div>
+    <div class="content loginPage">
+      <h2>Dwitter에 오신 것을 환영합니다!</h2>
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          required
-          value={Email}
-          onChange={onChange}
-        />
-        <input
-          type="password"
-          name="pw"
-          placeholder="Password"
-          required
-          value={Password}
-          onChange={onChange}
-        />
-        <input type="submit" value="Log In" />
+        <div className="inputWrap">
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            required
+            value={Email}
+            onChange={onChange}
+          />
+        </div>
+        <div className="inputWrap">
+          <input
+            type="password"
+            name="pw"
+            placeholder="Password"
+            required
+            value={Password}
+            onChange={onChange}
+          />
+        </div>
+        <div className="inputWrap">
+          <input type="submit" value="Log In" />
+        </div>
       </form>
-      <div>
+      <div class="btnWrap">
         <button name="google" onClick={onSocialClick}>
           Continue with Google
         </button>
